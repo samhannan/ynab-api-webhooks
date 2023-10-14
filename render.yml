@@ -1,0 +1,18 @@
+services:
+  - type: cron
+    name: ynab-webhook
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    schedule: "*/1 * * * *"
+    repo: https://github.com/samhannan/ynab-api-webhooks.git
+    autoDeploy: true
+    envVars:
+    - key: YNAB_API_TOKEN
+      sync: false
+    - key: WEBHOOK_URL
+      value: https://test.local
+    - key: REDIS_URL
+      value:
+    - key: BUDGET_ID
+      value: last-used
