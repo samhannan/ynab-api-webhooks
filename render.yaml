@@ -1,6 +1,8 @@
 services:
+  # Webhook scheduler
   - type: cron
     name: ynab-webhook
+    plan: starter
     runtime: docker
     dockerfilePath: ./Dockerfile
     dockerContext: .
@@ -12,7 +14,21 @@ services:
       sync: false
     - key: WEBHOOK_URL
       value: https://test.local
-    - key: REDIS_URL
-      value:
+    - key: REDIS_HOST
+      fromService:
+        type: redis
+        name: ynab-webhook-redis
+        property: host
+    - key: REDIS_PORT
+      fromService:
+        type: redis
+        name: ynab-webhook-redis
+        property: port
     - key: BUDGET_ID
       value: last-used
+  # Redis for Webhook scheduler
+  - type: redis
+    name: ynab-webhook-redis
+    ipAllowList: []
+    plan: free
+
