@@ -1,7 +1,7 @@
 services:
   # Webhook scheduler
   - type: cron
-    name: ynab-webhook
+    name: ynab-webhooks
     plan: starter
     runtime: docker
     dockerfilePath: ./Dockerfile
