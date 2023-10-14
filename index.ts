@@ -13,10 +13,7 @@ if (!webhookURL) {
   error("WEBHOOK_URL environment variable must be set.", true);
 }
 
-let redisURL = process.env.REDIS_URL;
-if (!redisURL) {
-  redisURL = "redis://localhost";
-}
+const redisURL : string = `redis://${process.env.REDIS_HOST ?? 'localhost'}:${process.env.REDIS_PORT ?? '6379'}`;
 
 let budgetID = process.env.BUDGET_ID;
 if (!budgetID) {
