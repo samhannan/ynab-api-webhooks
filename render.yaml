@@ -37,7 +37,7 @@ services:
         sync: false
       - key: WEBHOOK_URL
         fromService:
-          type: web
+          type: pserv
           name: ynab-monzo-sync
           property: host
       - key: BUDGET_ID
