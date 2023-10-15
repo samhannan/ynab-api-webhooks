@@ -12,8 +12,6 @@ services:
     envVars:
     - key: YNAB_API_TOKEN
       sync: false
-    - key: WEBHOOK_URL
-      value: https://test.local
     - key: REDIS_HOST
       fromService:
         type: redis
@@ -24,6 +22,11 @@ services:
         type: redis
         name: ynab-webhook-redis
         property: port
+    - key: WEBHOOK_URL
+      fromService:
+        type: web
+        name: ynab-monzo-sync
+        property: host
     - key: BUDGET_ID
       value: last-used
   # Redis for Webhook scheduler
