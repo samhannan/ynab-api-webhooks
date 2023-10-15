@@ -1,16 +1,5 @@
 services:
   #
-  # Sync service
-  #
-  - type: web
-    name: ynab-monzo-sync
-    plan: starter
-    runtime: docker
-    dockerfilePath: ./Dockerfile
-    dockerContext: .
-    repo: https://github.com/samhannan/ynab-monzo-sync.git
-    autoDeploy: false
-  #
   # Webhook scheduler
   #
   - type: cron
@@ -36,10 +25,7 @@ services:
       - key: YNAB_API_TOKEN
         sync: false
       - key: WEBHOOK_URL
-        fromService:
-          type: web
-          name: ynab-monzo-sync
-          property: host
+        value: "https://ynab-monzo-sync-w1z8.onrender.com"
       - key: BUDGET_ID
         value: last-used
   #
