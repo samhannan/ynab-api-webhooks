@@ -2,7 +2,7 @@ services:
   #
   # Sync service
   #
-  - type: pserv
+  - type: web
     name: ynab-monzo-sync
     plan: starter
     runtime: docker
@@ -37,7 +37,7 @@ services:
         sync: false
       - key: WEBHOOK_URL
         fromService:
-          type: pserv
+          type: web
           name: ynab-monzo-sync
           property: host
       - key: BUDGET_ID
