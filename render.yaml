@@ -1,5 +1,16 @@
 services:
   #
+  # Sync service
+  #
+  - type: pserv
+    name: ynab-monzo-sync
+    plan: starter
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    repo: https://github.com/samhannan/ynab-monzo-sync.git
+    autoDeploy: false
+  #
   # Webhook scheduler
   #
   - type: cron
@@ -38,15 +49,3 @@ services:
     name: ynab-webhook-redis
     ipAllowList: [ ]
     plan: free
-  #
-  # Sync service
-  #
-  - type: pserv
-    name: ynab-monzo-sync
-    plan: starter
-    runtime: docker
-    dockerfilePath: ./Dockerfile
-    dockerContext: .
-    repo: https://github.com/samhannan/ynab-monzo-sync.git
-    autoDeploy: false
-
