@@ -15,24 +15,6 @@ export YNAB_API_TOKEN=123 WEBHOOK_URL=https://mydomain.com/ynab-webhook-receive
 docker-compose up --build --exit-code-from app
 ```
 
-### Heroku
-
-The `heroku.yml` manifest file is used to define a Heroku application stack.  The `run` command in heroku.yml will reference the `SCHEDULE_INTERNAL_SECONDS` environment variable (default: 30) and run this app on an internal in the Heroku environment.
-
-**Provisioning (one time)**
-
-```
-heroku create ynab-api-webhooks --manifest
-heroku config:set YNAB_API_TOKEN=123 WEBHOOK_URL=https://mydomain.com/ynab-webhook-receive
-```
-
-**Deploying**
-
-```
-git push heroku master
-heroku scale app=1
-```
-
 ## Environment Variables
 
 - **YNAB_API_TOKEN** - The [YNAB API access token](https://api.youneedabudget.com/#personal-access-tokens). (**required**) 
