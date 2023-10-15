@@ -25,7 +25,7 @@ services:
       - key: YNAB_API_TOKEN
         sync: false
       - key: WEBHOOK_URL
-        value: "https://ynab-monzo-sync-w1z8.onrender.com"
+        value: "https://ynab-monzo-sync-w1z8.onrender.com/ynab"
       - key: BUDGET_ID
         value: last-used
   #
