@@ -1,5 +1,7 @@
 services:
+  #
   # Webhook scheduler
+  #
   - type: cron
     name: ynab-webhooks
     plan: starter
@@ -10,28 +12,41 @@ services:
     repo: https://github.com/samhannan/ynab-api-webhooks.git
     autoDeploy: true
     envVars:
-    - key: YNAB_API_TOKEN
-      sync: false
-    - key: REDIS_HOST
-      fromService:
-        type: redis
-        name: ynab-webhook-redis
-        property: host
-    - key: REDIS_PORT
-      fromService:
-        type: redis
-        name: ynab-webhook-redis
-        property: port
-    - key: WEBHOOK_URL
-      fromService:
-        type: web
-        name: ynab-monzo-sync
-        property: host
-    - key: BUDGET_ID
-      value: last-used
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: ynab-webhook-redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          type: redis
+          name: ynab-webhook-redis
+          property: port
+      - key: YNAB_API_TOKEN
+        sync: false
+      - key: WEBHOOK_URL
+        fromService:
+          type: web
+          name: ynab-monzo-sync
+          property: host
+      - key: BUDGET_ID
+        value: last-used
+  #
   # Redis for Webhook scheduler
+  #
   - type: redis
     name: ynab-webhook-redis
-    ipAllowList: []
+    ipAllowList: [ ]
     plan: free
+  #
+  # Sync service
+  #
+  - type: pserv
+    name: ynab-monzo-sync
+    plan: starter
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    repo: https://github.com/samhannan/ynab-monzo-sync.git
+    autoDeploy: false
 
